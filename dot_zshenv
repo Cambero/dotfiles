@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+###############################
+# EXPORT ENVIRONMENT VARIABLE #
+###############################
+
+# XDG
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$XDG_CONFIG_HOME/cache
+# default on linux
+# export XDG_DATA_HOME=$XDG_CONFIG_HOME/local/share
+# default on mac
+# export XDG_DATA_HOME=$HOME/Library/Application Support
+
+# editor
+export EDITOR="nvim"
+export VISUAL="code --wait"
+# export VISUAL="code --wait"
+
+# zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Brew
+export HOMEBREW_EVAL_ALL="true"
