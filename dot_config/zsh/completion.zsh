@@ -58,9 +58,6 @@ setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 # Ztyle pattern
 # :completion:<function>:<completer>:<command>:<argument>:<tag>
 
-# # Git add bash completions
-# zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-
 # Define completers
 zstyle ':completion:*' completer _extensions _complete _approximate
 
