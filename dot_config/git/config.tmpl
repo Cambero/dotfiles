@@ -1,0 +1,47 @@
+[include]
+  path = ~/.config/git/gitalias.txt
+
+[user]
+  name = Jose Luis Cambero
+  email = {{ .email }}
+
+# Only work inside dirs that are git repositories
+# So dont work in Sngular/
+[includeIf "gitdir:~/Work/Sngular/"]
+  path = ~/Work/Sngular/.gitconfig
+
+[github]
+  user = Cambero
+
+[core]
+	excludesfile = ~/.config/git/ignore
+	attributesfile = ~/.config/git/attributes
+	quotepath = false
+
+[push]
+	default = simple
+
+[mergetool]
+	keepBackup = true
+
+[commit]
+  gpgsign = false
+
+[credential]
+	helper = cache
+
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

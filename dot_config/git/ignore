@@ -1,0 +1,7 @@
+*.swp
+.DS_Store
+.dropbox
+
+.idea/*
+__my*
+myowndocs/
