@@ -1,0 +1,4 @@
+# without new line
+echo -n "Enter your name: "
+echo "Enter your name: \c"
+*depend of the system OS*

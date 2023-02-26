@@ -10,7 +10,19 @@ bindkey -e
 ### Completion
 source $ZDOTDIR/completion.zsh
 
-# HISTORY
+# +------------+
+# | NAVIGATION |
+# +------------+
+setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+
+# +---------+
+# | HISTORY |
+# +---------+
+export HISTSIZE=50000            # Maximum events for internal history
+export SAVEHIST=50000            # Maximum events in history file
+export HISTORY_IGNORE="(ls|cd|pwd|exit|ls)" # Dont save to history file this commands
+
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
