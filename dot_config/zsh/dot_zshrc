@@ -56,7 +56,7 @@ alias pfile="pbpaste > "
 eval "$(zoxide init zsh)"
 
 ### FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f $ZDOTDIR/.fzf.zsh ] && source $ZDOTDIR/.fzf.zsh
 
 ### LESPIPPE
 export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
@@ -74,8 +74,6 @@ eval "$(dircolors -b $ZDOTDIR/dircolors-solarized.256dark)"
 
 # ctrl-x h show completion contexts
 source $ZDOTDIR/completion.zsh
-
-
 
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
