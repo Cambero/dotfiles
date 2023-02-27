@@ -2,6 +2,11 @@
 # http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Zle-Builtins
 # http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
 
+# bindkey => show all keybindings
+# alt-x => mode Execute, within:
+#     which-command         # show keybing for a command 
+#     describe-key-briefly  # search command for a keybing
+
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
@@ -55,10 +60,10 @@ bindkey -M emacs '^[^[[D' backward-word
 bindkey -M viins '^[^[[D' backward-word
 bindkey -M vicmd '^[^[[D' backward-word
 
-# file rename magick
+# [alt-m] Copy previous word, file rename magick
 bindkey "^[m" copy-prev-shell-word
 
-# Edit the current command line in $EDITOR
+# [ctrl-x ctrl-e] Edit the current command line in $VISUAL / $EDITOR
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line

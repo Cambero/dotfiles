@@ -31,3 +31,6 @@ brew cleanup
 
 # Reveal the location where it is installed
 brew --prefix <formula>
+
+# Generate Brewfile with installed
+brew bundle dump --describe

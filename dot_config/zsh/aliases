@@ -1,0 +1,159 @@
+alias l="exa -1F --group-directories-first --icons"
+alias la="l -a"
+alias ll="l -l --git"
+alias lla="ll -a"
+
+
+alias ch="chezmoi"
+
+alias zedit="chezmoi edit $ZDOTDIR/.zshrc --apply"
+
+alias h="history -i -50" 
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias zz="cd $ZDOTDIR"
+alias cdc="chezmoi cd"
+
+function takedir() {
+  mkdir -p $@ && cd ${@:$#}
+}
+
+alias pfile="pbpaste > "
+
+
+function takegit() {
+  git clone $1
+  cd $(basename ${1%%.git})
+}
+
+
+
+
+alias batl='bat --paging=never -l log'
+alias bata="bat -A"
+
+alias g="git"
+# alias gs='git status'
+# alias gss='git status -s'
+# alias ga='git add'
+# alias gaa='git add .'
+
+# alias gpush='git push'
+# alias gpraise='git blame'
+# alias gpo='git push origin'
+# alias gpt='git push --tag'
+# alias gtd='git tag --delete'
+# alias gtdr='git tag --delete origin'
+# alias grb='git branch -r'                                                                           # display remote branch
+# alias gplo='git pull origin'
+# alias gb='git branch '
+# alias gc='git commit'
+# alias gd='git diff'
+# alias gco='git checkout '
+# alias gl='git log --pretty=oneline'
+# alias gr='git remote'
+# alias grs='git remote show'
+# alias glol='git log --graph --abbrev-commit --oneline --decorate'
+# alias gclean="git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d" # Delete local branch merged with master
+# alias gblog="git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(refname:short)%(color:reset) - %(color:yellow)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:blue)%(committerdate:relative)%(color:reset))'"                                                             # git log for each branches
+
+
+## global aliases ##
+
+alias -g H="--help"
+
+alias -g F="| fzf"
+alias -g CC="| pbcopy"
+alias -g B="| bat"
+alias -g BL="| batl"
+alias -g C="| wc -l"
+#alias -g '...'='../..'
+#alias -g '....'='../../..'
+#alias -g BG='& exit'
+#alias -g C='|wc -l'
+#alias -g G='|grep'
+#alias -g H='|head'
+#alias -g Hl=' --help |& less -r'
+#alias -g K='|keep'
+#alias -g L='|less'
+#alias -g LL='|& less -r'
+#alias -g M='|most'
+#alias -g N='&>/dev/null'
+#alias -g R='| tr A-z N-za-m'
+#alias -g SL='| sort | less'
+#alias -g S='| sort'
+#alias -g T='|tail'
+#alias -g V='| vim -'
+
+
+
+
+
+
+### Copiados del plugin macos, solo me interesa esto
+function quick-look() {
+  (( $# > 0 )) && qlmanage -p $* &>/dev/null &
+}
+
+function man-preview() {
+  local location
+  # Don't let Preview.app steal focus if the man page doesn't exist
+  location=$(man -w "$@") && mandoc -Tpdf $location | open -f -a Preview
+}
+# compdef _man man-preview
+
+
+
+historystat() {
+    history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
+}
+
+# export FZF_COMPLETION_TRIGGER=''
+# bindkey '^T' fzf-completion
+# bindkey '^I' $fzf_default_completion
+
+
+fzf-man-widget() {
+  
+  batman="echo {} | sed -e 's/(.*//' | xargs man | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""
+   man -k . | sort | uniq \
+   | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' \
+   | fzf  \
+      -q "$1" \
+      --ansi \
+      --tiebreak=begin \
+      --prompt=' Man > '  \
+      --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
+      --preview "${batman}" \
+      --bind "enter:become(${batman})" \
+      --bind "alt-c:+change-preview(echo {} | sed -e 's/(.*//' | xargs cheat)+change-prompt(ﯽ Cheat > )" \
+      --bind "alt-m:+change-preview(${batman})+change-prompt( Man > )" \
+      --bind "alt-t:+change-preview(echo {} | sed -e 's/(.*//' | xargs tldr)+change-prompt(ﳁ TLDR > )"
+  zle reset-prompt
+}
+#--bind "enter:execute(echo {} | sed -e 's/(.*//' | xargs man)"
+
+# `Ctrl-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
+bindkey '^h' fzf-man-widget
+zle -N fzf-man-widget
+
+# man -k ls | sort | uniq | sed -e 's/(.*//'
+# "awk '{sum+=\$1} END {print sum}' {+f}"
+# awk '{gsub(/\([0-9]\)/,""); print $1;}'
+
+
+# export FZF_DEFAULT_COMMAND="fd -Hi -tf --exclude '.git' --ignore-file=~/.config/ignore"
+
+# function fzf-my-file-explorer() {
+#     fzf
+#     # fzf --ansi #\
+#         #--query "${*}"
+# }
+# zle     -N            fzf-my-file-explorer
+# # bindkey -M emacs '^X' fzf-my-file-explorer
+# bindkey -M emacs '^X' fzf-my-file-explorer
+
+
+
+# autoload -Uz zkbd

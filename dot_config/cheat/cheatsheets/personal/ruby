@@ -21,12 +21,5 @@ ruby -c <file>
 ruby -Idirectory
 ruby -Ispec spec/test_spec.rb
 
-# My extra
-#
-
-def greetings
-  @var.map do |bb|
-  puts bb
-    
-  end
-end
+# Pipeline shelll output to ruby
+ls ~ | ruby -ne 'print $_'
