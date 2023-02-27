@@ -27,3 +27,11 @@
     url = "https://github.com/romkatv/powerlevel10k/archive/v1.15.0.tar.gz"
     exact = true
     stripComponents = 1
+    refreshPeriod = "168h"
+[".config/zsh/plugins/zcolors"]
+    type = "archive"
+    url = "https://github.com/marlonrichert/zcolors/archive/main.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+

@@ -58,6 +58,8 @@ setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 # Ztyle pattern
 # :completion:<function>:<completer>:<command>:<argument>:<tag>
 
+zstyle ':completion:*:processes' command "ps -wu$USER -opid,user,comm"
+
 # Define completers
 zstyle ':completion:*' completer _extensions _complete _approximate
 
@@ -81,20 +83,22 @@ zstyle ':completion:*' complete-options true
 
 zstyle ':completion:*' file-sort modification
 
-
-zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
-zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
-zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+# Dont work format
+# TODO comented to disable groups
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}- %d (errors: %e) -%f'
+zstyle ':completion:*:*:*:*:descriptions' format '-- %d --'
+zstyle ':completion:*:*:*:*:messages' format ' %-- %d --'
 zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
-# zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+
 # Colors for files and directory
-zstyle ':completion:*:*:*:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle '*' list-colors ${(s.:.)LS_COLORS}
 
 # Only display some tags for the command cd
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
 # zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
 
-# Required for completion to be in good groups (named after the tags)
+# # Required for completion to be in good groups (named after the tags)
+# TODO comented to disable groups
 zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands

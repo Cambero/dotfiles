@@ -34,9 +34,6 @@ setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
-### Completion
-source $ZDOTDIR/completion.zsh
-
 ### THEME
 source $ZDOTDIR/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -50,7 +47,9 @@ alias ch="chezmoi"
 alias zedit="chezmoi edit $ZDOTDIR/.zshrc --apply"
 alias h="history -i -50" 
 alias ..="cd .."
-
+function takedir() {
+  mkdir -p $@ && cd ${@:$#}
+}
 alias pfile="pbpaste > "
 
 ### ZOXIDE
@@ -59,20 +58,43 @@ eval "$(zoxide init zsh)"
 ### FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
+### LESPIPPE
+export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+export LESS=' -R -X -F '
+
+
+### COLORS
+source $ZDOTDIR/plugins/zcolors/zcolors.plugin.zsh
+source $ZDOTDIR/.zcolors
+eval "$(dircolors -b $ZDOTDIR/dircolors-solarized.256dark)"
+
+#
+### Completion
+#
+
+# ctrl-x h show completion contexts
+source $ZDOTDIR/completion.zsh
+
+
+
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# source $ZDOTDIR/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -l --color=always $realpath'
+# FZF-TAB
+# ctrl-x h show completion contexts
+source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 
-# zstyle ':fzf-tab:complete:*:options' fzf-preview 
-# zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
-# zstyle ':fzf-tab:sources' config-directory $ZDOTDIR/plugins/fzf-tab-source/sources
-# zstyle ':fzf-tab:sources' config-directory config_directory
-
+# fzf-tab-previews
+# https://github.com/Freed-Wu/fzf-tab-source
+# https://github.com/Aloxaf/fzf-tab/wiki/Configuration
+# to debug fzf-tab variables
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -l --color=always $realpath'
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # Note the source command must be at the end of ~/.zshrc.
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+alias r="ch apply; source $ZDOTDIR/.zshrc"
