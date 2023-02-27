@@ -1,3 +1,34 @@
-{{- if eq .chezmoi.arch "arm64" -}}
-eval "$(/opt/homebrew/bin/brew shellenv)"
-{{- end -}}# 
+# PATH should be on zshenv but Mac deal with path in weird way
+# https://gist.github.com/Cambero/159a8fa86dca02286e9e8790b1fdb894
+
+# GNU commnads
+# gnu-sed   => sed
+# awk       => awk
+# grep      => grep egrep fgrep
+# findutils => find locate updatedb xargs
+# coreutils => cat ls echo cut wc uniq ...
+gnu_packages=('gnu-sed' 'gawk' 'grep' 'findutils' 'coreutils')
+
+{{- if eq .chezmoi.arch "arm64" }}
+eval "$(/opt/homebrew/bin/brew shellenv)" # Hombrew ENV vars
+
+if [[ $USE_GNU_COMMANDS = true ]]; then
+    for package in $gnu_packages; do
+        gnu_path="/usr/local/opt/$package/libexec/gnubin"
+        [[ -d $gnu_path ]] && PATH="$gnu_path:$PATH"
+    done
+    export PATH
+fi
+{{- end -}}
+
+{{- if eq .chezmoi.arch "amd64" }}
+
+if [[ $USE_GNU_COMMANDS = true ]]; then
+    for package in $gnu_packages; do
+        gnu_path="/usr/local/opt/$package/libexec/gnubin"
+        [[ -d $gnu_path ]] && PATH="$gnu_path:$PATH"
+    done
+    export PATH
+fi
+
+{{- end -}}

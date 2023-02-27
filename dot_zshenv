@@ -13,12 +13,19 @@ export XDG_CACHE_HOME=$XDG_CONFIG_HOME/cache
 # export XDG_DATA_HOME=$HOME/Library/Application Support
 
 # editor
-export EDITOR="nvim"
+export EDITOR=nvim
 export VISUAL="code --wait"
-# export VISUAL="code --wait"
 
 # zsh
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
 # Brew
-export HOMEBREW_EVAL_ALL="true"
+export HOMEBREW_EVAL_ALL=true
+
+# Lesspipe 
+export LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
+
+# GNU Commands
+# true  => zprofile will load GNU commands with his names
+# false => GNU commands with prefix g
+export USE_GNU_COMMANDS=true

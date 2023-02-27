@@ -5,31 +5,25 @@ fi
 
 fpath=($ZDOTDIR/plugins $fpath)
 
+# CUSTOM BINDINGS
 bindkey -e
-
-### Completion
-source $ZDOTDIR/completion.zsh
-
-# GNU Commands
-export PATH="/usr/local/opt/gawk/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-# A lot of commands.. add?
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+source $ZDOTDIR/key-bindings.zsh
 
 # +------------+
 # | NAVIGATION |
 # +------------+
-export HISTSIZE=50000            # Maximum events for internal history
-export SAVEHIST=50000            # Maximum events in history file
-export HISTORY_IGNORE="(ls|cd|pwd|exit|ls)" # Dont save to history file this commands
-
+setopt AUTO_CD              # If the command is a dirname perform cd
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 
 # +---------+
 # | HISTORY |
 # +---------+
+# if export in zshenv will be overwrited by /etc/zshrc
+export HISTSIZE=50000            # Maximum events for internal history
+export SAVEHIST=50000            # Maximum events in history file
+export HISTORY_IGNORE="(ls|cd|pwd|exit|ls)" # Dont save to history file this commands
+
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
@@ -39,6 +33,9 @@ setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
 setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
+
+### Completion
+source $ZDOTDIR/completion.zsh
 
 ### THEME
 source $ZDOTDIR/plugins/powerlevel10k/powerlevel10k.zsh-theme
@@ -54,6 +51,8 @@ alias zedit="chezmoi edit $ZDOTDIR/.zshrc --apply"
 alias h="history -i -50" 
 alias ..="cd .."
 
+alias pfile="pbpaste > "
+
 ### ZOXIDE
 eval "$(zoxide init zsh)"
 
@@ -63,22 +62,17 @@ eval "$(zoxide init zsh)"
 source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-source $ZDOTDIR/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
+# source $ZDOTDIR/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
 # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -l --color=always $realpath'
 
-zstyle ':fzf-tab:complete:*:options' fzf-preview 
-zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
+# zstyle ':fzf-tab:complete:*:options' fzf-preview 
+# zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
 # zstyle ':fzf-tab:sources' config-directory $ZDOTDIR/plugins/fzf-tab-source/sources
 # zstyle ':fzf-tab:sources' config-directory config_directory
 
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-
-# CUSTOM BINDINGS
-source $ZDOTDIR/key-bindings.zsh
-
-export LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
 
 # Note the source command must be at the end of ~/.zshrc.
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
