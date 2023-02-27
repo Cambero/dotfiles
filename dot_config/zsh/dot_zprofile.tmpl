@@ -14,7 +14,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)" # Hombrew ENV vars
 
 if [[ $USE_GNU_COMMANDS = true ]]; then
     for package in $gnu_packages; do
-        gnu_path="/usr/local/opt/$package/libexec/gnubin"
+        gnu_path="/opt/homebrew/opt/$package/libexec/gnubin"
         [[ -d $gnu_path ]] && PATH="$gnu_path:$PATH"
     done
     export PATH
