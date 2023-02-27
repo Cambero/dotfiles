@@ -13,11 +13,6 @@ if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
   [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 fi
 
-# Needed?
-# Add plugins directory to fpath
-# fpath=($ZDOTDIR/plugins $fpath)
-unsetopt beep
-
 # +--------+
 # | Colors |
 # +--------+
@@ -36,6 +31,8 @@ source $ZDOTDIR/key-bindings.zsh
 setopt AUTO_CD              # If the command is a dirname perform cd
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+
+unsetopt beep
 
 # +---------+
 # | History |
@@ -70,6 +67,8 @@ eval "$(zoxide init zsh)"
 export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
 export LESS=' -R -X -F '
 
+
+
 ## FASD
 # Check
 # eval "$(fasd --init auto)"
@@ -89,13 +88,19 @@ source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # ctrl-x h show completion contexts
 source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 
+
 # fzf-tab-previews
 # https://github.com/Freed-Wu/fzf-tab-source
 # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
 # to debug fzf-tab variables
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -l --color=always $realpath'
-
+# zstyle ':fzf-tab:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
+# zstyle ':fzf-tab:complete:ls:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
 
 # Note the source command must be at the end of ~/.zshrc.
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+# check
+# https://github.com/adamnorwood/adamnorwood-zsh/blob/main/.zshrc
+
+# https://github.com/romkatv/zsh4humans#installation

@@ -15,8 +15,10 @@
 # +---------+
 
 # Load more completions
+fpath=($ZDOTDIR/plugins $fpath)
 fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
 fpath=($ZDOTDIR/completions $fpath)
+
 
 # Should be called before compinit
 # zmodload zsh/complist
@@ -54,6 +56,21 @@ setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 # +---------+
 # | zstyles |
 # +---------+
+
+# fzf-tab
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
+zstyle ':fzf-tab:*' fzf-min-height 10
+# zstyle ':fzf-tab:*' fzf-pad 4
+zstyle ':fzf-tab:*' continuous-trigger 'right'
+# zstyle ':fzf-tab:complete:cd:*' disabled-on any
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -l --color=always $realpath'
+# zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
+
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+
 
 # Ztyle pattern
 # :completion:<function>:<completer>:<command>:<argument>:<tag>

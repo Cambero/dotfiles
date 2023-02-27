@@ -61,13 +61,14 @@ alias g="git"
 
 ## global aliases ##
 
-alias -g H="--help"
+# alias -g H="--help"
 
 alias -g F="| fzf"
 alias -g CC="| pbcopy"
 alias -g B="| bat"
 alias -g BL="| batl"
-alias -g C="| wc -l"
+# alias -g C="| wc -l"
+
 #alias -g '...'='../..'
 #alias -g '....'='../../..'
 #alias -g BG='& exit'
@@ -92,51 +93,51 @@ alias -g C="| wc -l"
 
 
 ### Copiados del plugin macos, solo me interesa esto
-function quick-look() {
-  (( $# > 0 )) && qlmanage -p $* &>/dev/null &
-}
+# function quick-look() {
+#   (( $# > 0 )) && qlmanage -p $* &>/dev/null &
+# }
 
-function man-preview() {
-  local location
-  # Don't let Preview.app steal focus if the man page doesn't exist
-  location=$(man -w "$@") && mandoc -Tpdf $location | open -f -a Preview
-}
+# function man-preview() {
+#   local location
+#   # Don't let Preview.app steal focus if the man page doesn't exist
+#   location=$(man -w "$@") && mandoc -Tpdf $location | open -f -a Preview
+# }
 # compdef _man man-preview
 
 
 
-historystat() {
-    history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
-}
+# historystat() {
+#     history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
+# }
 
 # export FZF_COMPLETION_TRIGGER=''
 # bindkey '^T' fzf-completion
 # bindkey '^I' $fzf_default_completion
 
 
-fzf-man-widget() {
+# fzf-man-widget() {
   
-  batman="echo {} | sed -e 's/(.*//' | xargs man | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""
-   man -k . | sort | uniq \
-   | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' \
-   | fzf  \
-      -q "$1" \
-      --ansi \
-      --tiebreak=begin \
-      --prompt=' Man > '  \
-      --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
-      --preview "${batman}" \
-      --bind "enter:become(${batman})" \
-      --bind "alt-c:+change-preview(echo {} | sed -e 's/(.*//' | xargs cheat)+change-prompt(ﯽ Cheat > )" \
-      --bind "alt-m:+change-preview(${batman})+change-prompt( Man > )" \
-      --bind "alt-t:+change-preview(echo {} | sed -e 's/(.*//' | xargs tldr)+change-prompt(ﳁ TLDR > )"
-  zle reset-prompt
-}
+#   batman="echo {} | sed -e 's/(.*//' | xargs man | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""
+#    man -k . | sort | uniq \
+#    | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' \
+#    | fzf  \
+#       -q "$1" \
+#       --ansi \
+#       --tiebreak=begin \
+#       --prompt=' Man > '  \
+#       --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
+#       --preview "${batman}" \
+#       --bind "enter:become(${batman})" \
+#       --bind "alt-c:+change-preview(echo {} | sed -e 's/(.*//' | xargs cheat)+change-prompt(ﯽ Cheat > )" \
+#       --bind "alt-m:+change-preview(${batman})+change-prompt( Man > )" \
+#       --bind "alt-t:+change-preview(echo {} | sed -e 's/(.*//' | xargs tldr)+change-prompt(ﳁ TLDR > )"
+#   zle reset-prompt
+# }
 #--bind "enter:execute(echo {} | sed -e 's/(.*//' | xargs man)"
 
 # `Ctrl-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
-bindkey '^h' fzf-man-widget
-zle -N fzf-man-widget
+# bindkey '^h' fzf-man-widget
+# zle -N fzf-man-widget
 
 # man -k ls | sort | uniq | sed -e 's/(.*//'
 # "awk '{sum+=\$1} END {print sum}' {+f}"
@@ -157,3 +158,20 @@ zle -N fzf-man-widget
 
 
 # autoload -Uz zkbd
+
+
+
+# draw colors palette
+palette() {
+  local -a colors
+  for i in {000..255}; do
+      colors+=("%F{$i}$i%f")
+  done
+  print -cP $colors
+}
+
+# Usage: printc COLOR_CODE
+printc() {
+    local color="%F{$1}"
+    echo -E ${(qqqq)${(%)color}}
+}
