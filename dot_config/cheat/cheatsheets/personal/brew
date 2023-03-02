@@ -33,4 +33,4 @@ brew cleanup
 brew --prefix <formula>
 
 # Generate Brewfile with installed
-brew bundle dump --describe
+brew bundle dump --describe --file by_default_Brewfile

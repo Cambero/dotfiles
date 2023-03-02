@@ -23,6 +23,7 @@ fi
 # Use emacs key bindings
 bindkey -e
 
+
 # Start typing + [Up-Arrow] - fuzzy find history forward
 if [[ -n "${terminfo[kcuu1]}" ]]; then
   autoload -U up-line-or-beginning-search
@@ -67,3 +68,11 @@ bindkey "^[m" copy-prev-shell-word
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
+
+# https://nathangrigg.com/2014/04/zsh-push-line-or-edit
+# Remap to push-line-or-edit
+# "^[q" push-line # alt-q 
+# "^[Q" push-line # alt-Q
+# "^Q" push-line  # ctrl-Q # dont work on iterm2
+bindkey "^[q" push-line-or-edit
+bindkey "^[Q" push-line-or-edit

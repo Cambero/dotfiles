@@ -15,10 +15,9 @@
 # +---------+
 
 # Load more completions
-fpath=($ZDOTDIR/plugins $fpath)
 fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
 fpath=($ZDOTDIR/completions $fpath)
-
+fpath=($fpath "$(brew --prefix)/share/zsh/site-functions")
 
 # Should be called before compinit
 # zmodload zsh/complist
@@ -36,6 +35,9 @@ bindkey -M menuselect '^xi' vi-insert                      # Insert
 bindkey -M menuselect '^xh' accept-and-hold                # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
 bindkey -M menuselect '^xu' undo                           # Undo
+
+# Pick item but stay in the menu
+# bindkey -M menuselect "+" accept-and-menu-complete
 
 autoload -U compinit; compinit
 _comp_options+=(globdots) # With hidden files

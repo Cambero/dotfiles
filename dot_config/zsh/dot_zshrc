@@ -16,6 +16,7 @@ fi
 # +--------+
 # | Colors |
 # +--------+
+# There's a generator here: http://geoff.greer.fm/lscolors/
 source $ZDOTDIR/plugins/zcolors/zcolors.plugin.zsh
 source $ZDOTDIR/.zcolors
 eval "$(dircolors -b $ZDOTDIR/dircolors-solarized.256dark)"
@@ -31,7 +32,6 @@ source $ZDOTDIR/key-bindings.zsh
 setopt AUTO_CD              # If the command is a dirname perform cd
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
-
 unsetopt beep
 
 # +---------+
@@ -67,27 +67,22 @@ eval "$(zoxide init zsh)"
 export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
 export LESS=' -R -X -F '
 
-
-
 ## FASD
-# Check
+# Checking
 # eval "$(fasd --init auto)"
 # alias fe="fasd -ae"
-
 
 #
 ### Completion
 #
 
-# ctrl-x h show completion contexts
-source $ZDOTDIR/completion.zsh
-
-source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # FZF-TAB
 # ctrl-x h show completion contexts
+######### Checking. source before than completion to activate preview of git #############################################
 source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 
+# ctrl-x h show completion contexts
+source $ZDOTDIR/completion.zsh
 
 # fzf-tab-previews
 # https://github.com/Freed-Wu/fzf-tab-source
@@ -96,11 +91,26 @@ source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 # zstyle ':fzf-tab:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
 # zstyle ':fzf-tab:complete:ls:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
 
+# zstyle ':completion::complete:-parameter-::' fzf-preview 'echo var'
+# Preview for ENV VARS
+# zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+# zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
+# 	'git diff $word | delta'
+# Disable / enable on commands
+# <command list> === (cd|ls)
+# zstyle ':fzf-tab:complete:<command in allowlist>:*' disabled-on none
+# zstyle ':fzf-tab:complete:exa:*' disabled-on files
+# zstyle ':fzf-tab:complete:exa:*' disabled-on any
+
+##
+## Scripts
+##
+for file in $ZDOTDIR/scripts/*.zsh; do
+  source $file
+done
+
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Note the source command must be at the end of ~/.zshrc.
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-
-# check
-# https://github.com/adamnorwood/adamnorwood-zsh/blob/main/.zshrc
-
-# https://github.com/romkatv/zsh4humans#installation

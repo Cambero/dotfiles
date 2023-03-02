@@ -10,5 +10,3 @@ keybindings.json
 .config/zsh/.zsh_sessions
 **/*.zwc
 **/cache
-
-

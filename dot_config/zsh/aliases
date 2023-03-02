@@ -1,109 +1,112 @@
+alias r="cha && source $ZDOTDIR/.zshrc"
+
+# ls
 alias l="exa -1F --group-directories-first --icons"
+alias ls="exa -F --group-directories-first --icons"
 alias la="l -a"
 alias ll="l -l --git"
 alias lla="ll -a"
 
-
+# chezmoi
 alias ch="chezmoi"
-
+alias cha="chezmoi apply"
+alias chd="chezmoi diff"
 alias zedit="chezmoi edit $ZDOTDIR/.zshrc --apply"
+alias cdc="chezmoi cd"
 
-alias h="history -i -50" 
-
+# dirs
+alias mkdir="mkdir -p"
 alias ..="cd .."
 alias ...="cd ../.."
 alias zz="cd $ZDOTDIR"
-alias cdc="chezmoi cd"
+alias sizes='du -hd1 | sort -hr'
 
+# Play safe!
+alias 'rm=rm -i'
+alias 'mv=mv -i'
+alias 'cp=cp -i'
+
+# history
+alias h="history -i -50" 
+
+# "history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head"
+# what do this? ${(o)history%% *}
+alias top_cmd="print -l -- ${(o)history%% *} | uniq -c | sort -nr | head -n 10"
+
+# clipboard
+alias pfile="pbpaste > "
+
+# bat
+alias batl='bat --paging=never -l log'
+alias bata="bat -A"
+
+# Global aliases (expand whatever their position)
+#  e.g. find . :E :L
+alias -g :F="| fzf"
+alias -g :CC="| pbcopy"
+alias -g :B="| bat"
+alias -g :BL="| batl"
+alias -g :C="| wc -l"
+alias -g :G='| rg'
+alias -g :H=" --help |& bat -l help"
+alias -g :N='&> /dev/null'  # stdout and stderr 
+alias -g :E='2> /dev/null'  # stderr 
+# |& shorhand for 2>&1
+# If |& is used, command's standard error, in addition to its standard output, is connected to command2's standard input through the pipe
+alias -g :L='|& less'   
+# read from stdin    
+alias -g :-C='| code -' 
+alias -g :-V='| vim -'
+
+unglobalalias() {
+    for i in ':F' ':CC' ':B' ':BL' ':C' ':G' ':H' ':N' ':E' ':L' ':-C' ':-V'; unalias $i
+}
+
+# git
+alias g="git"
+alias mgl="git -c color.status=always status --short | fzf --height 100% --ansi \
+--preview '(git diff HEAD --color=always -- {-1} | sed 1,4d)' \
+--preview-window right:65% |
+cut -c4- |
+sed 's/.* -> //' |
+tr -d '\n'"
+
+
+
+
+#
+##
+### Functions
+##
+#
 function takedir() {
   mkdir -p $@ && cd ${@:$#}
 }
-
-alias pfile="pbpaste > "
-
 
 function takegit() {
   git clone $1
   cd $(basename ${1%%.git})
 }
 
+#
+## fzf path
+#
+function pathf() {
+  fuzzy_path $PATH
+}
+function fpathf() {
+  fuzzy_path $FPATH
+}
+
+function fuzzy_path() {
+  echo $1 | tr ':' '\n' | fzf --height=100% --preview 'exa -F --group-directories-first --icons {}' --layout=reverse --info=inline --border=sharp
+}
 
 
-
-alias batl='bat --paging=never -l log'
-alias bata="bat -A"
-
-alias g="git"
-# alias gs='git status'
-# alias gss='git status -s'
-# alias ga='git add'
-# alias gaa='git add .'
-
-# alias gpush='git push'
-# alias gpraise='git blame'
-# alias gpo='git push origin'
-# alias gpt='git push --tag'
-# alias gtd='git tag --delete'
-# alias gtdr='git tag --delete origin'
-# alias grb='git branch -r'                                                                           # display remote branch
-# alias gplo='git pull origin'
-# alias gb='git branch '
-# alias gc='git commit'
-# alias gd='git diff'
-# alias gco='git checkout '
-# alias gl='git log --pretty=oneline'
-# alias gr='git remote'
-# alias grs='git remote show'
-# alias glol='git log --graph --abbrev-commit --oneline --decorate'
-# alias gclean="git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d" # Delete local branch merged with master
-# alias gblog="git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(refname:short)%(color:reset) - %(color:yellow)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:blue)%(committerdate:relative)%(color:reset))'"                                                             # git log for each branches
-
-
-## global aliases ##
-
-# alias -g H="--help"
-
-alias -g F="| fzf"
-alias -g CC="| pbcopy"
-alias -g B="| bat"
-alias -g BL="| batl"
-# alias -g C="| wc -l"
-
-#alias -g '...'='../..'
-#alias -g '....'='../../..'
-#alias -g BG='& exit'
-#alias -g C='|wc -l'
-#alias -g G='|grep'
-#alias -g H='|head'
-#alias -g Hl=' --help |& less -r'
-#alias -g K='|keep'
-#alias -g L='|less'
-#alias -g LL='|& less -r'
-#alias -g M='|most'
-#alias -g N='&>/dev/null'
-#alias -g R='| tr A-z N-za-m'
-#alias -g SL='| sort | less'
-#alias -g S='| sort'
-#alias -g T='|tail'
-#alias -g V='| vim -'
-
-
-
-
-
-
-### Copiados del plugin macos, solo me interesa esto
-# function quick-look() {
-#   (( $# > 0 )) && qlmanage -p $* &>/dev/null &
-# }
-
-# function man-preview() {
-#   local location
-#   # Don't let Preview.app steal focus if the man page doesn't exist
-#   location=$(man -w "$@") && mandoc -Tpdf $location | open -f -a Preview
-# }
-# compdef _man man-preview
-
+# Quick look of file
+function quick-look() {
+  (( $# > 0 )) && qlmanage -p $* &>/dev/null &
+}
 
 
 # historystat() {
