@@ -36,3 +36,6 @@ export EXA_COLORS="in=0;38:lc=0;38:ur=0;33:uw=0;33:ux=0;33:ue=0;33:gr=0;37:gw=0;
 
 # zsh help
 export HELPDIR=/usr/share/zsh/5.8.1/help
+
+# tmux
+export TMUX_HOME=$XDG_CONFIG_HOME/tmux

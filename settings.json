@@ -1,5 +1,6 @@
 {
   "editor.accessibilitySupport": "off",
   "editor.fontSize": 16,
-  "security.workspace.trust.untrustedFiles": "open"
+  "security.workspace.trust.untrustedFiles": "open",
+  "window.zoomLevel": 1
 }

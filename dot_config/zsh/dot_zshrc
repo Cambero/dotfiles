@@ -80,7 +80,8 @@ eval "$(zoxide init zsh)"
 # from: cmdtree=$(ps -T -oargs=)
 # to:   cmdtree=$(ps -oargs=)
 export LESSOPEN="|$HOMEBREW_PREFIX/bin/lesspipe.sh %s"
-export LESS=' -R -X -F '
+export LESSHISTFILE=- # no use history .lesshst
+export LESS="--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --quit-at-eof"
 
 ## FASD
 # Checking

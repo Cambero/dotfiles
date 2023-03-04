@@ -7,8 +7,16 @@
 
 #
 # Origin
-#
 # https://github.com/Phantas0s/.dotfiles/blob/master/zsh/completion.zsh
+#
+# Good to know
+# echo $_comps[rg]        # show function name
+# echo $functions[_rg]    # show function
+# whence -v $_comps[rg]   # show where it came from
+# help whence             # for more info
+#
+# set -x    # enable trace for debug
+# set +x    # disable  trace for debug
 
 # +---------+
 # | General |
