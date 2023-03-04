@@ -57,6 +57,18 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # +---------+
 source $ZDOTDIR/aliases
 
+
+# +----------+
+# | Zsh Help |
+# +----------+
+# Use zsh help instead man
+# bindkeys: alt-h  &  alt-H
+unalias run-help 2>/dev/null       # don't display err if already done
+autoload -Uz run-help              # load the function
+
+### Broot
+source $XDG_CONFIG_HOME/broot/launcher/bash/br
+
 ### ZOXIDE
 eval "$(zoxide init zsh)"
 
@@ -64,7 +76,10 @@ eval "$(zoxide init zsh)"
 [ -f $ZDOTDIR/.fzf.zsh ] && source $ZDOTDIR/.fzf.zsh
 
 ### LESPIPPE
-export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+# Changed on lesspipe.sh to avoid -ps stdin not a terminal error-
+# from: cmdtree=$(ps -T -oargs=)
+# to:   cmdtree=$(ps -oargs=)
+export LESSOPEN="|$HOMEBREW_PREFIX/bin/lesspipe.sh %s"
 export LESS=' -R -X -F '
 
 ## FASD
@@ -84,12 +99,16 @@ source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 # ctrl-x h show completion contexts
 source $ZDOTDIR/completion.zsh
 
+
 # fzf-tab-previews
+# source $ZDOTDIR/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
+
 # https://github.com/Freed-Wu/fzf-tab-source
 # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
 # to debug fzf-tab variables
 # zstyle ':fzf-tab:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
 # zstyle ':fzf-tab:complete:ls:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
+
 
 # zstyle ':completion::complete:-parameter-::' fzf-preview 'echo var'
 # Preview for ENV VARS
@@ -113,3 +132,5 @@ source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Note the source command must be at the end of ~/.zshrc.
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+source $ZDOTDIR/functions.zsh

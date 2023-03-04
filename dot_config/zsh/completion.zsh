@@ -67,11 +67,11 @@ zstyle ':fzf-tab:*' fzf-min-height 10
 zstyle ':fzf-tab:*' continuous-trigger 'right'
 # zstyle ':fzf-tab:complete:cd:*' disabled-on any
 
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -l --color=always $realpath'
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -l --color=always $realpath'
 # zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
-zstyle ':fzf-tab:complete:*:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
+# zstyle ':fzf-tab:complete:*:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
 
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+# zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 
 
 # Ztyle pattern

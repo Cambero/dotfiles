@@ -1,11 +1,17 @@
 alias r="cha && source $ZDOTDIR/.zshrc"
 
-# ls
-alias l="exa -1F --group-directories-first --icons"
-alias ls="exa -F --group-directories-first --icons"
-alias la="l -a"
-alias ll="l -l --git"
-alias lla="ll -a"
+# exa
+# alias l="exa -1F --group-directories-first --icons"
+# alias ls="exa -F --group-directories-first --icons"
+# alias la="l -a"
+# alias ll="l -l --git"
+# alias lla="ll -a"
+
+# lsd
+alias l="lsd"
+alias la="lsd -a"
+alias ll="lsd -l"
+alias lla="lsd -la"
 
 # chezmoi
 alias ch="chezmoi"
@@ -28,10 +34,12 @@ alias 'cp=cp -i'
 
 # history
 alias h="history -i -50" 
-
+alias hs="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 # "history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head"
 # what do this? ${(o)history%% *}
 alias top_cmd="print -l -- ${(o)history%% *} | uniq -c | sort -nr | head -n 10"
+
+alias files_by_dir="fd -Hi . | cut -d/ -f1 | sort | uniq -c | sort -nr | head -n 10"
 
 # clipboard
 alias pfile="pbpaste > "
@@ -39,6 +47,10 @@ alias pfile="pbpaste > "
 # bat
 alias batl='bat --paging=never -l log'
 alias bata="bat -A"
+
+# zsh help & man
+alias zman="man zshall"
+alias help=run-help
 
 # Global aliases (expand whatever their position)
 #  e.g. find . :E :L
@@ -58,9 +70,7 @@ alias -g :L='|& less'
 alias -g :-C='| code -' 
 alias -g :-V='| vim -'
 
-unglobalalias() {
-    for i in ':F' ':CC' ':B' ':BL' ':C' ':G' ':H' ':N' ':E' ':L' ':-C' ':-V'; unalias $i
-}
+alias unglobal_alias="unalias ':F' ':CC' ':B' ':BL' ':C' ':G' ':H' ':N' ':E' ':L' ':-C' ':-V'"
 
 # git
 alias g="git"
@@ -71,110 +81,5 @@ cut -c4- |
 sed 's/.* -> //' |
 tr -d '\n'"
 
-
-
-
-#
-##
-### Functions
-##
-#
-function takedir() {
-  mkdir -p $@ && cd ${@:$#}
-}
-
-function takegit() {
-  git clone $1
-  cd $(basename ${1%%.git})
-}
-
-#
-## fzf path
-#
-function pathf() {
-  fuzzy_path $PATH
-}
-function fpathf() {
-  fuzzy_path $FPATH
-}
-
-function fuzzy_path() {
-  echo $1 | tr ':' '\n' | fzf --height=100% --preview 'exa -F --group-directories-first --icons {}' --layout=reverse --info=inline --border=sharp
-}
-
-
-# Quick look of file
-function quick-look() {
-  (( $# > 0 )) && qlmanage -p $* &>/dev/null &
-}
-
-
-# historystat() {
-#     history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
-# }
-
-# export FZF_COMPLETION_TRIGGER=''
-# bindkey '^T' fzf-completion
-# bindkey '^I' $fzf_default_completion
-
-
-# fzf-man-widget() {
-  
-#   batman="echo {} | sed -e 's/(.*//' | xargs man | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""
-#    man -k . | sort | uniq \
-#    | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' \
-#    | fzf  \
-#       -q "$1" \
-#       --ansi \
-#       --tiebreak=begin \
-#       --prompt=' Man > '  \
-#       --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
-#       --preview "${batman}" \
-#       --bind "enter:become(${batman})" \
-#       --bind "alt-c:+change-preview(echo {} | sed -e 's/(.*//' | xargs cheat)+change-prompt(ﯽ Cheat > )" \
-#       --bind "alt-m:+change-preview(${batman})+change-prompt( Man > )" \
-#       --bind "alt-t:+change-preview(echo {} | sed -e 's/(.*//' | xargs tldr)+change-prompt(ﳁ TLDR > )"
-#   zle reset-prompt
-# }
-#--bind "enter:execute(echo {} | sed -e 's/(.*//' | xargs man)"
-
-# `Ctrl-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
-# bindkey '^h' fzf-man-widget
-# zle -N fzf-man-widget
-
-# man -k ls | sort | uniq | sed -e 's/(.*//'
-# "awk '{sum+=\$1} END {print sum}' {+f}"
-# awk '{gsub(/\([0-9]\)/,""); print $1;}'
-
-
-# export FZF_DEFAULT_COMMAND="fd -Hi -tf --exclude '.git' --ignore-file=~/.config/ignore"
-
-# function fzf-my-file-explorer() {
-#     fzf
-#     # fzf --ansi #\
-#         #--query "${*}"
-# }
-# zle     -N            fzf-my-file-explorer
-# # bindkey -M emacs '^X' fzf-my-file-explorer
-# bindkey -M emacs '^X' fzf-my-file-explorer
-
-
-
-# autoload -Uz zkbd
-
-
-
-# draw colors palette
-palette() {
-  local -a colors
-  for i in {000..255}; do
-      colors+=("%F{$i}$i%f")
-  done
-  print -cP $colors
-}
-
-# Usage: printc COLOR_CODE
-printc() {
-    local color="%F{$1}"
-    echo -E ${(qqqq)${(%)color}}
-}
+# jless for yaml
+alias yless="jless --yaml"

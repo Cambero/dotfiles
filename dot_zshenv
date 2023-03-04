@@ -13,7 +13,7 @@ export XDG_CACHE_HOME=$XDG_CONFIG_HOME/cache
 # export XDG_DATA_HOME=$HOME/Library/Application Support
 
 # editor
-export EDITOR=nvim
+export EDITOR="code --wait"
 export VISUAL="code --wait"
 
 # zsh
@@ -30,3 +30,9 @@ export USE_GNU_COMMANDS=true
 # locale
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
+
+# EXA
+export EXA_COLORS="in=0;38:lc=0;38:ur=0;33:uw=0;33:ux=0;33:ue=0;33:gr=0;37:gw=0;37:gx=0;37:tr=0;31:tw=0;31:tx=0;31:da=0;36:uu=0;33:gu=0;37"
+
+# zsh help
+export HELPDIR=/usr/share/zsh/5.8.1/help

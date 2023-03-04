@@ -1,0 +1,2 @@
+# print each entry in a new line
+print -rl $path
