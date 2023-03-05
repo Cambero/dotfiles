@@ -11,26 +11,22 @@
 # coreutils => cat ls echo cut wc uniq ...
 gnu_packages=('gnu-sed' 'gawk' 'grep' 'findutils' 'coreutils' 'make')
 
-{{- if eq .chezmoi.arch "arm64" }}
-eval "$(/opt/homebrew/bin/brew shellenv)" # Hombrew ENV vars
 
-if [[ $USE_GNU_COMMANDS = true ]]; then
-    for package in $gnu_packages; do
-        gnu_path="/opt/homebrew/opt/$package/libexec/gnubin"
-        [[ -d $gnu_path ]] && PATH="$gnu_path:$PATH"
-    done
-    export PATH
-fi
+
+{{- if eq .chezmoi.arch "arm64" }}
+    eval "$(/opt/homebrew/bin/brew shellenv)"  # Hombrew ENV vars
 {{- end}}
 
 {{- if eq .chezmoi.arch "amd64" }}
+    eval "$(/usr/local/bin/brew shellenv)"      # Hombrew ENV vars
+{{- end}}
+
 
 if [[ $USE_GNU_COMMANDS = true ]]; then
     for package in $gnu_packages; do
-        gnu_path="/usr/local/opt/$package/libexec/gnubin"
+        gnu_path="$HOMEBREW_PREFIX/opt/$package/libexec/gnubin"
         [[ -d $gnu_path ]] && PATH="$gnu_path:$PATH"
     done
     export PATH
 fi
 
-{{- end}}

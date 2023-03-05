@@ -33,6 +33,7 @@ source $ZDOTDIR/key-bindings.zsh
 setopt AUTO_CD              # If the command is a dirname perform cd
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
 
 # +----------+
 # | Settings |
@@ -40,6 +41,10 @@ setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 setopt NOCLOBBER            # Don’t write over existing files with >, use >! instead
 setopt NOBEEP               # No beep
 setopt RM_STAR_WAIT         # wait ten seconds when `rm *' or `rm path/*'. can avoid by expanding the * in ZLE (with tab).
+setopt CORRECT              # Spelling correction
+setopt CDABLE_VARS          # Change directory to a path stored in a variable.
+setopt EXTENDED_GLOB        # Use extended globbing syntax.
+
 
 # +---------+
 # | History |
@@ -48,7 +53,7 @@ setopt RM_STAR_WAIT         # wait ten seconds when `rm *' or `rm path/*'. can a
 export HISTSIZE=50000            # Maximum events for internal history
 export SAVEHIST=50000            # Maximum events in history file
 # Dont save to history file this commands
-export HISTORY_IGNORE="(l *|la *|ll *|lla *|lsd *|ls *|cd|pwd|exit)" 
+export HISTORY_IGNORE="(l *|la *|ll *|lla *|lsd *|ls *|cd|cd *|pwd|exit)" 
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
@@ -80,7 +85,7 @@ source $XDG_CONFIG_HOME/broot/launcher/bash/br
 eval "$(zoxide init zsh)"
 
 ### FZF
-[ -f $ZDOTDIR/.fzf.zsh ] && source $ZDOTDIR/.fzf.zsh
+source $ZDOTDIR/fzf.zsh
 
 ### LESPIPPE
 # Changed on lesspipe.sh to avoid -ps stdin not a terminal error-
