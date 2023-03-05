@@ -39,3 +39,6 @@ export HELPDIR=/usr/share/zsh/5.8.1/help
 
 # tmux
 export TMUX_HOME=$XDG_CONFIG_HOME/tmux
+
+# Color
+export CLICOLOR=1

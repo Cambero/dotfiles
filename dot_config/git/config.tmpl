@@ -1,12 +1,11 @@
-[include]
-  path = ~/.config/git/gitalias.txt
-
 [user]
   name = Jose Luis Cambero
   email = {{ .email }}
 
-# Only work inside dirs that are git repositories
-# So dont work in Sngular/
+[include]
+  path = ~/.config/git/gitalias.txt
+
+# Only work inside dirs that are git repositories, dont Work in Sngular/
 [includeIf "gitdir:~/Work/Sngular/"]
   path = ~/Work/Sngular/.gitconfig
 
@@ -19,25 +18,35 @@
 	quotepath = false
 	pager = delta
 
+[branch]
+	sort = committerdate
+
 [interactive]
     diffFilter = delta --color-only
 
 [delta]
-    navigate = true    # use n and N to move between diff sections
-    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [merge]
-    conflictstyle = diff3
+  conflictstyle = diff3
 
 [diff]
 	colorMoved = default    
 
-
 [push]
-	default = simple
+	# https://git-scm.com/docs/git-config#git-config-pushdefault
+	default = nothing
 
 [commit]
   gpgsign = false
 
 [credential]
 	helper = cache
+
+# https://git-scm.com/docs/git-rerere
+[rerere]
+  enabled = true
+
+[init]
+	defaultBranch = main

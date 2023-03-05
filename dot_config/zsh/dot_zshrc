@@ -17,6 +17,7 @@ fi
 # | Colors |
 # +--------+
 # There's a generator here: http://geoff.greer.fm/lscolors/
+autoload colors && colors
 source $ZDOTDIR/plugins/zcolors/zcolors.plugin.zsh
 source $ZDOTDIR/.zcolors
 eval "$(dircolors -b $ZDOTDIR/dircolors-solarized.256dark)"
@@ -32,7 +33,13 @@ source $ZDOTDIR/key-bindings.zsh
 setopt AUTO_CD              # If the command is a dirname perform cd
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
-unsetopt beep
+
+# +----------+
+# | Settings |
+# +----------+
+setopt NOCLOBBER            # Don’t write over existing files with >, use >! instead
+setopt NOBEEP               # No beep
+setopt RM_STAR_WAIT         # wait ten seconds when `rm *' or `rm path/*'. can avoid by expanding the * in ZLE (with tab).
 
 # +---------+
 # | History |
@@ -128,10 +135,46 @@ source $ZDOTDIR/completion.zsh
 for file in $ZDOTDIR/scripts/*.zsh; do
   source $file
 done
+source $ZDOTDIR/functions.zsh
+
+##
+## Plugins
+##
 
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20 # Doc Recommended value is 20.
+
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8,bold"
+
+# Widget Mapping
+# This plugin works by triggering custom behavior when certain zle widgets are invoked. You can add and remove widgets from these arrays to change the behavior of this plugin:
+# ZSH_AUTOSUGGEST_CLEAR_WIDGETS: Widgets in this array will clear the suggestion when invoked.
+# ZSH_AUTOSUGGEST_ACCEPT_WIDGETS: Widgets in this array will accept the suggestion when invoked.
+# ZSH_AUTOSUGGEST_EXECUTE_WIDGETS: Widgets in this array will execute the suggestion when invoked.
+# ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS: Widgets in this array will partially accept the suggestion when invoked.
+# ZSH_AUTOSUGGEST_IGNORE_WIDGETS: Widgets in this array will not trigger any custom behavior.
+# Widgets that modify the buffer and are not found in any of these arrays will fetch a new suggestion after they are invoked.
+# Note: A widget shouldn't belong to more than one of the above arrays.
+
+# Remove (el) from (arr)ay
+# arr=("${(@)arr:#el}")
+
+# ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
+# cual me gusta mas
+# alt-m  
+bindkey "^[m" autosuggest-execute 
+# ctrl-space
+bindkey '^ ' autosuggest-execute
+# alt-enter
+bindkey '^[^M' autosuggest-execute
 
 # Note the source command must be at the end of ~/.zshrc.
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# fast-theme -l # list themes
+# fast-theme -t # test theme
 
-source $ZDOTDIR/functions.zsh
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+  test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
+fi
+

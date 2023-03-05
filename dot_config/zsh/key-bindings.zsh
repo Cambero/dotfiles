@@ -6,6 +6,12 @@
 # alt-x => mode Execute, within:
 #     which-command         # show keybing for a command 
 #     describe-key-briefly  # search command for a keybing
+#
+# show code for keystroke
+# cat -v
+# cat > /dev/null
+# read
+# ctrl-v and press the key combination
 
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
@@ -76,3 +82,12 @@ bindkey '\C-x\C-e' edit-command-line
 # "^Q" push-line  # ctrl-Q # dont work on iterm2
 bindkey "^[q" push-line-or-edit
 bindkey "^[Q" push-line-or-edit
+
+
+# Defaults that I like
+# alt-?	      # which-command
+# ctrl-x a    # alias-expension
+
+# alt-s || alt-S || alt-$   # spell-word
+# ctrl-t || ctrl-T          # transpose-words
+# ctrl-l || ctrl-alt-l      # clear-screen
