@@ -42,3 +42,6 @@ export TMUX_HOME=$XDG_CONFIG_HOME/tmux
 
 # Color
 export CLICOLOR=1
+
+# FZF
+export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"

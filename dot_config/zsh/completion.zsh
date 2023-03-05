@@ -18,6 +18,10 @@
 # set -x    # enable trace for debug
 # set +x    # disable  trace for debug
 
+# ctrl-x h    _complete_help (fzf-tab?)
+# ctrl-x ?    complete_debug
+# ctrl-x t    complete_tag
+
 # +---------+
 # | General |
 # +---------+
@@ -121,7 +125,9 @@ zstyle '*' list-colors ${(s.:.)LS_COLORS}
 
 # Only display some tags for the command cd
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
-# zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
+
+# TODO Enable to test
+zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
 
 # # Required for completion to be in good groups (named after the tags)
 # TODO comented to disable groups

@@ -103,14 +103,12 @@ export LESS="--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL
 #
 ### Completion
 #
-
-# FZF-TAB
-# ctrl-x h show completion contexts
-######### Checking. source before than completion to activate preview of git #############################################
-source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
-
 # ctrl-x h show completion contexts
 source $ZDOTDIR/completion.zsh
+
+# FZF-TAB
+# NOTE: fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting!!
+source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 
 # fzf-tab-previews
@@ -169,8 +167,8 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8,bold"
 # cual me gusta mas
 # alt-m  
 bindkey "^[m" autosuggest-execute 
-# ctrl-space
-bindkey '^ ' autosuggest-execute
+# # ctrl-space
+# bindkey '^ ' autosuggest-execute
 # alt-enter
 bindkey '^[^M' autosuggest-execute
 

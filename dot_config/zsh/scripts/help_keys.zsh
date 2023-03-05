@@ -2,7 +2,7 @@
 #v1# set number of lines to display per page
 HELP_LINES_PER_PAGE=20
 #v1# set location of help-zle cache file
-HELP_ZLE_CACHE_FILE=~/.cache/zsh_help_zle_lines.zsh
+HELP_ZLE_CACHE_FILE=$XDG_CONFIG_HOME/.cache/zsh_help_zle_lines.zsh
 # helper function for help-zle, actually generates the help text
 function help_zle_parse_keybindings () {
     emulate -L zsh
@@ -10,7 +10,7 @@ function help_zle_parse_keybindings () {
     unsetopt ksharrays  #indexing starts at 1
 
     #v1# choose files that help-zle will parse for keybindings
-    ((${+HELPZLE_KEYBINDING_FILES})) || HELPZLE_KEYBINDING_FILES=( /etc/zsh/zshrc ~/.zshrc.pre ~/.zshrc ~/.zshrc.local )
+    ((${+HELPZLE_KEYBINDING_FILES})) || HELPZLE_KEYBINDING_FILES=( /etc/zsh/zshrc $ZDOTDIR/.zshrc $ZDOTDIR/key-bindings.zsh $ZDOTDIR/completion.zsh )
 
     if [[ -r $HELP_ZLE_CACHE_FILE ]]; then
         local load_cache=0

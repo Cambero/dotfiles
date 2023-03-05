@@ -11,7 +11,7 @@ elif [ -d "$1" ]; then
 elif [ "$category" = image ]; then
 	exiftool "$1" | bat --color=always -plyaml
 elif [ "$category" = text ]; then
-	bat --color=always "$1"
+	bat --color=auto "$1"
 else
 	exit 1
 fi

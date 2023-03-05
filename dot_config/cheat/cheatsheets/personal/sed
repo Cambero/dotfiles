@@ -25,3 +25,12 @@ sed '/happily ever after/a\The end.'
 # Get nth line
 sed 'NUMq;d' file
 
+# Delete lines matching pattern, print the output
+sed '/pattern to match/d' ./infile
+
+# Delete lines matching pattern, directly modify the file
+sed -i '/pattern to match/d' ./infile
+
+# Delete lines matching pattern, directly modify the file and create a backup
+sed -i.bak '/pattern to match/d' ./infile
+    -i.$(date +%s)bak # backup with timestamps

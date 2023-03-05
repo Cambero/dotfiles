@@ -9,18 +9,16 @@
 # make      => make
 # findutils => find locate updatedb xargs
 # coreutils => cat ls echo cut wc uniq ...
-gnu_packages=('gnu-sed' 'gawk' 'grep' 'findutils' 'coreutils' 'make')
+gnu_packages=(gnu-sed gawk grep findutils coreutils make)
 
-
-
+# Hombrew ENV vars
 {{- if eq .chezmoi.arch "arm64" }}
-    eval "$(/opt/homebrew/bin/brew shellenv)"  # Hombrew ENV vars
+    eval "$(/opt/homebrew/bin/brew shellenv)"  
 {{- end}}
 
 {{- if eq .chezmoi.arch "amd64" }}
-    eval "$(/usr/local/bin/brew shellenv)"      # Hombrew ENV vars
+    eval "$(/usr/local/bin/brew shellenv)"
 {{- end}}
-
 
 if [[ $USE_GNU_COMMANDS = true ]]; then
     for package in $gnu_packages; do

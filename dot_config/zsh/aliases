@@ -1,4 +1,7 @@
-alias r="cha && source $ZDOTDIR/.zshrc"
+alias r="cha && rm -rf $ZDOTDIR/.zcompdump* && source $ZDOTDIR/.zshrc"
+
+alias timestamp="date +%s"
+alias timestamph="date +%y_%m_%d_%H_%M_%S"
 
 # brew
 alias brewu='brew update && brew upgrade && brew cleanup && brew doctor'
