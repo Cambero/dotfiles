@@ -1,4 +1,4 @@
-alias r="cha && rm -rf $ZDOTDIR/.zcompdump* && source $ZDOTDIR/.zshrc"
+alias r="cha && source $ZDOTDIR/.zshrc"
 
 alias timestamp="date +%s"
 alias timestamph="date +%y_%m_%d_%H_%M_%S"
@@ -41,7 +41,7 @@ alias sizes='du -hd1 | sort -hr'
 alias o="open"
 alias oa="open -a"
 # Play safe!
-alias 'rm=rm -i'
+alias 'rm=rm -Iv'
 alias 'mv=mv -i'
 alias 'cp=cp -i'
 
@@ -90,7 +90,10 @@ alias -g :-V='| vim -'
 alias unglobal_alias="unalias ':F' ':CC' ':B' ':BL' ':C' ':G' ':H' ':N' ':E' ':L' ':-C' ':-V'"
 
 # git
-# export DELTA_FEATURES='+side-by-side my-feature'
+
+alias sideon="export DELTA_FEATURES='+side-by-side my-feature'"
+alias sideoff="export DELTA_FEATURES='-side-by-side my-feature'"
+
 alias g="git"
 alias mgl="git -c color.status=always status --short | fzf --height 100% --ansi \
 --preview '(git diff HEAD --color=always -- {-1} | sed 1,4d)' \

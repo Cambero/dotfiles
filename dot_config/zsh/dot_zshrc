@@ -148,7 +148,8 @@ source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20 # Doc Recommended value is 20.
 
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8,bold"
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8,bold"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=249"
 
 # Widget Mapping
 # This plugin works by triggering custom behavior when certain zle widgets are invoked. You can add and remove widgets from these arrays to change the behavior of this plugin:
@@ -181,3 +182,4 @@ if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
   test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
 fi
 
+[[ -f $ZDOTDIR/.zshrc.local ]] && source $ZDOTDIR/.zshrc.local

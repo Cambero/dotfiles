@@ -1,6 +1,16 @@
 {
   "editor.accessibilitySupport": "off",
-  "editor.fontSize": 16,
+  "editor.fontSize": 18,
   "security.workspace.trust.untrustedFiles": "open",
-  "window.zoomLevel": -1
+  "editor.formatOnSave": true,
+  "[ruby]": {
+    "editor.defaultFormatter": "testdouble.vscode-standard-ruby"
+  },
+  "editor.wordBasedSuggestions": false,
+  "editor.definitionLinkOpensInPeek": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "workbench.colorTheme": "Monokai Dimmed",
+  "workbench.iconTheme": "material-icon-theme",
+"redhat.telemetry.enabled": false
 }

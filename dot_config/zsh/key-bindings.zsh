@@ -68,7 +68,7 @@ bindkey -M viins '^[^[[D' backward-word
 bindkey -M vicmd '^[^[[D' backward-word
 
 # [alt-m] Copy previous word, file rename magick
-bindkey "^[m" copy-prev-shell-word
+bindkey -M emacs "^[m" copy-prev-shell-word
 
 # [ctrl-x ctrl-e] Edit the current command line in $VISUAL / $EDITOR
 autoload -U edit-command-line
@@ -80,8 +80,8 @@ bindkey '\C-x\C-e' edit-command-line
 # "^[q" push-line # alt-q 
 # "^[Q" push-line # alt-Q
 # "^Q" push-line  # ctrl-Q # dont work on iterm2
-bindkey "^[q" push-line-or-edit
-bindkey "^[Q" push-line-or-edit
+bindkey -M emacs "^[q" push-line-or-edit
+bindkey -M emacs "^[Q" push-line-or-edit
 
 
 # Defaults that I like

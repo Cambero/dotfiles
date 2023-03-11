@@ -5,6 +5,7 @@ source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 # source $DOTFILES/zsh/scripts_fzf.zsh # fzf Scripts
 
 # Used with FZF_COMPLETION_DIR_COMMANDS **
+# FZF_CTRL_T_COMMAND
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
@@ -29,11 +30,11 @@ _fzf_comprun() {
   esac
 }
 
+# export FZF_DEFAULT_OPTS="--bind 'change:first'"
+# FZF_DEFAULT_COMMAND
+# export FZF_COMPLETION_OPTS='--border --info=inline'
 
-export FZF_COMPLETION_OPTS='--border --info=inline'
-# export FZF_CTRL_R_OPTS="--bind 'alt-z:+change-preview(tac $HISTFILE)' --bind 'alt-x:+change-preview(echo {})'"
-# export FZF_CTRL_R_OPTS="--bind 'alt-z:+execute-silent(sed -i 's/.*zzz$//' $HISTFILE)'"
-
+# export FZF_CTRL_T_OPTS="--bind 'alt-e:become(code -g {})'"
 
 #
 # Clever hack: set up double <Tab> instead of $FZF_COMPLETION_TRIGGER for default fzf completion
@@ -80,4 +81,4 @@ KEYTIMEOUT=20
 bindkey -M emacs '\t\t' fzf-completion-notrigger
 # Bind Ctrl-Space in case I am unable to use double <Tab> due to a combination
 # of the aggressive $KEYTIMEOUT on a slow link.
-bindkey -M emacs '^ ' fzf-completion-notrigger
+# bindkey -M emacs '^ ' fzf-completion-notrigger

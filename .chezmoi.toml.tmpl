@@ -1,4 +1,16 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
 
+progress = true
+verbose = true
+
 [data]
     email = {{ $email | quote }}
+
+[diff]
+    pager = "delta"
+
+[edit]
+    command = "code"
+    args = ["--wait"]
+    apply = true
+    watch = true

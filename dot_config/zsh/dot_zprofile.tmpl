@@ -20,6 +20,8 @@ gnu_packages=(gnu-sed gawk grep findutils coreutils make)
     eval "$(/usr/local/bin/brew shellenv)"
 {{- end}}
 
+source $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
+
 if [[ $USE_GNU_COMMANDS = true ]]; then
     for package in $gnu_packages; do
         gnu_path="$HOMEBREW_PREFIX/opt/$package/libexec/gnubin"

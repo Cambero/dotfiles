@@ -7,5 +7,49 @@
     {
         "key": "cmd+b",
         "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "args": {
+            "command": "rgf"
+        },
+        "command": "command-runner.run",
+        "key": "cmd+k ."
+    },
+    {
+        "key": "cmd+k cmd+p",
+        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
+    },
+    {
+        "key": "shift+/",
+        "command": "metaGo.metaJump.hideDecoration",
+        "when": "editorTextFocus && metaGoJumping"
+    },
+    {
+        "key": "shift+space",
+        "command": "-metaGo.metaJump.hideDecoration",
+        "when": "editorTextFocus && metaGoJumping"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-editor.action.transposeLetters",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "-workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "ctrl+alt+cmd+f",
+        "command": "standardRuby.formatAutoFixes"
+    },
+    {
+        "key": "ctrl+shift+alt+cmd+a",
+        "command": "workbench.action.showAboutDialog"
     }
 ]
