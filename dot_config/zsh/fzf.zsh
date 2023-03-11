@@ -4,37 +4,30 @@ source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 
 # source $DOTFILES/zsh/scripts_fzf.zsh # fzf Scripts
 
-# Used with FZF_COMPLETION_DIR_COMMANDS **
-# FZF_CTRL_T_COMMAND
+# Used by FZF_COMPLETION_DIR_COMMANDS **
 _fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
+  fd --type d --hidden --exclude ".git" . "$1"
 }
 
-# User by other commands **
+# # User by other commands **
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
+  fd --hidden --exclude ".git" . "$1"
 }
-
 
 _fzf_comprun() {
   local command=$1
   shift
 
   case "$command" in
-    cd)           fd -td -H --max-depth=3 | fzf --preview 'tree -C {}' "$@";;
-    tree)         find . -type d | fzf --preview 'tree -C {}' "$@";;
+    cd)           fd -td -H | fzf --preview 'lsd --tree --directory-only {}' "$@";;
+    tree)         fd -td -H d | fzf --preview 'lsd --tree --directory-only {}' "$@";;
     # ls)           fzf --preview 'echo {}' "$@" ;;
     # git)          echo "uno dos" | tr ' ' '\n' | fzf "$@";;
+		# can use alias like ll
     ll)          echo "uno dos" | tr ' ' '\n' | fzf "$@";;
     *)            fzf "$@" ;;
   esac
 }
-
-# export FZF_DEFAULT_OPTS="--bind 'change:first'"
-# FZF_DEFAULT_COMMAND
-# export FZF_COMPLETION_OPTS='--border --info=inline'
-
-# export FZF_CTRL_T_OPTS="--bind 'alt-e:become(code -g {})'"
 
 #
 # Clever hack: set up double <Tab> instead of $FZF_COMPLETION_TRIGGER for default fzf completion

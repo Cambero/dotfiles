@@ -28,7 +28,7 @@ export HOMEBREW_EVAL_ALL=true
 export USE_GNU_COMMANDS=true
 
 # locale
-export LC_ALL=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # EXA
@@ -47,33 +47,19 @@ export CLICOLOR=1
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/rg/ripgreprc
 
 # FZF
-export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"
-
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--bind 'alt-e:execute(code {})+abort' --bind 'alt-r:execute(code {})+abort'"
 
-# FZF_COLORS="bg+:-1,\
-# fg:gray,\
-# fg+:white,\
-# border:black,\
-# spinner:0,\
-# hl:yellow,\
-# header:blue,\
-# info:green,\
-# pointer:red,\
-# marker:blue,\
-# prompt:gray,\
-# hl+:red"
-
-colors="--color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --color info:254,prompt:37,spinner:108,pointer:235,marker:235"
-
-# --color '$FZF_COLORS' \
 export FZF_DEFAULT_OPTS="--height 60% \
 --border sharp \
 --layout reverse \
 --prompt '∷ ' \
 --pointer ▶ \
---marker ⇒ \
+--marker ⇒
 --bind change:first"
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
+
+# --color=dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --color info:254,prompt:37,spinner:108,pointer:235,marker:235
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"
+
+

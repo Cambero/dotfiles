@@ -50,7 +50,7 @@ alias ping='prettyping --nolegend'
 alias pingg='ping google.com'
 
 # history
-alias h="history -i -50" 
+alias h="history -i -50"
 alias hs="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 # "history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head"
 # what do this? ${(o)history%% *}
@@ -78,13 +78,13 @@ alias -g :BL="| batl"
 alias -g :C="| wc -l"
 alias -g :G='| rg'
 alias -g :H=" --help |& bat -l help"
-alias -g :N='&> /dev/null'  # stdout and stderr 
-alias -g :E='2> /dev/null'  # stderr 
+alias -g :N='&> /dev/null'  # stdout and stderr
+alias -g :E='2> /dev/null'  # stderr
 # |& shorhand for 2>&1
 # If |& is used, command's standard error, in addition to its standard output, is connected to command2's standard input through the pipe
-alias -g :L='|& less'   
-# read from stdin    
-alias -g :-C='| code -' 
+alias -g :L='|& less'
+# read from stdin
+alias -g :-C='| code -'
 alias -g :-V='| vim -'
 
 alias unglobal_alias="unalias ':F' ':CC' ':B' ':BL' ':C' ':G' ':H' ':N' ':E' ':L' ':-C' ':-V'"
@@ -119,6 +119,6 @@ alias tkss='tmux kill-session -t'
 
 
 
-################################### 
+###################################
 # aliases[cmd] show alias for cmd
 
