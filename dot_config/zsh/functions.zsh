@@ -39,7 +39,7 @@ printc() {
 function fvars(){
   env | cut -d= -f1 | fzf --preview 'eval print -rl \${}' --preview-window=wrap
 }
- 
+
 ## fzf path
 function fpath() { fuzzy_path $PATH }
 function ffpath() { fuzzy_path $FPATH }
@@ -49,7 +49,7 @@ function fuzzy_path() {
 }
 
 # zsh options
-zsh_options() { 
+zsh_options() {
   printf '%s=%s\n' "${(@kv)options}" | fzf
 }
 
@@ -57,6 +57,13 @@ zsh_options() {
 function quick-look() {
   (( $# > 0 )) && qlmanage -p $* &>/dev/null &
 }
+
+
+## Utils
+files_by_extension() {
+	 fd -Hi -tf --exclude '.git' | awk -F . '{print $NF}' | sort | uniq -c | awk '{print $1,$2}' | sort -n -r | head -n 10
+}
+
 
 
 # ----------------------------------------------------------

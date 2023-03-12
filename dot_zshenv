@@ -47,19 +47,23 @@ export CLICOLOR=1
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/rg/ripgreprc
 
 # FZF
+export FZF_HISTFILE=$ZDOTDIR/.fzf_history
+
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export FZF_DEFAULT_OPTS="--height 60% \
---border sharp \
---layout reverse \
---prompt '∷ ' \
---pointer ▶ \
---marker ⇒
---bind change:first"
+export FZF_DEFAULT_OPTS="\
+	--history=$FZF_HISTFILE \
+	--ansi \
+	--height 60% \
+	--border sharp \
+	--layout reverse \
+	--prompt '∷ ' \
+	--pointer ▶ \
+	--marker ⇒ \
+	--bind change:first"
 
 # --color=dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --color info:254,prompt:37,spinner:108,pointer:235,marker:235
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"
-
 

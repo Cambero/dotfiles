@@ -1,4 +1,4 @@
-  # ____ ___  __  __ ____  _     _____ _____ ___ ___  _   _ 
+  # ____ ___  __  __ ____  _     _____ _____ ___ ___  _   _
 #  / ___/ _ \|  \/  |  _ \| |   | ____|_   _|_ _/ _ \| \ | |
 # | |  | | | | |\/| | |_) | |   |  _|   | |  | | | | |  \| |
 # | |__| |_| | |  | |  __/| |___| |___  | |  | | |_| | |\  |
@@ -91,7 +91,7 @@ zstyle ':fzf-tab:*' continuous-trigger 'right'
 zstyle ':completion:*:processes' command "ps -wu$USER -opid,user,comm"
 
 # Define completers
-zstyle ':completion:*' completer _extensions _complete _approximate
+zstyle ':completion:*' completer _extensions _complete # _approximate
 
 # Use cache for commands using cache
 zstyle ':completion:*' use-cache on

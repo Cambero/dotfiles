@@ -53,7 +53,7 @@ setopt EXTENDED_GLOB        # Use extended globbing syntax.
 export HISTSIZE=50000            # Maximum events for internal history
 export SAVEHIST=50000            # Maximum events in history file
 # Dont save to history file this commands
-export HISTORY_IGNORE="(l *|la *|ll *|lla *|lsd *|ls *|cd|cd *|pwd|exit)" 
+export HISTORY_IGNORE="(l *|la *|ll *|lla *|lsd *|ls *|cd|cd *|pwd|exit)"
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
@@ -166,8 +166,8 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=249"
 
 # ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
 # cual me gusta mas
-# alt-m  
-bindkey "^[m" autosuggest-execute 
+# alt-m
+bindkey "^[m" autosuggest-execute
 # # ctrl-space
 # bindkey '^ ' autosuggest-execute
 # alt-enter

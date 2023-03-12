@@ -6,12 +6,12 @@ source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 
 # Used by FZF_COMPLETION_DIR_COMMANDS **
 _fzf_compgen_dir() {
-  fd --type d --hidden --exclude ".git" . "$1"
+  fd --color=always --type d --hidden --exclude ".git" . "$1"
 }
 
 # # User by other commands **
 _fzf_compgen_path() {
-  fd --hidden --exclude ".git" . "$1"
+  fd --color=always --hidden --exclude ".git" . "$1"
 }
 
 _fzf_comprun() {
@@ -19,8 +19,8 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fd -td -H | fzf --preview 'lsd --tree --directory-only {}' "$@";;
-    tree)         fd -td -H d | fzf --preview 'lsd --tree --directory-only {}' "$@";;
+    # cd)           fd -td -H | fzf --preview 'lsd --tree --directory-only {}' "$@";;
+    # tree)         fd -td -H d | fzf --preview 'lsd --tree --directory-only {}' "$@";;
     # ls)           fzf --preview 'echo {}' "$@" ;;
     # git)          echo "uno dos" | tr ' ' '\n' | fzf "$@";;
 		# can use alias like ll
@@ -28,6 +28,9 @@ _fzf_comprun() {
     *)            fzf "$@" ;;
   esac
 }
+
+# copied from
+# https://github.com/intelfx/dotfiles/blob/d1f980c9967f5764c12f77744fe16fbb497c57e6/.zshrc.d/fzf
 
 #
 # Clever hack: set up double <Tab> instead of $FZF_COMPLETION_TRIGGER for default fzf completion
