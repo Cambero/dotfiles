@@ -3,3 +3,6 @@
 --max-columns-preview
 --glob=!.git/
 --smart-case
+--no-heading
+--line-number
+--color=always
