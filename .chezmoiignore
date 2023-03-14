@@ -1,7 +1,3 @@
-# Visual Studio Code
-settings.json
-keybindings.json
-
 # Cache
 **/.DS_Store
 .config/zsh/.zcompcache
