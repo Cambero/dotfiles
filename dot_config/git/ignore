@@ -1,7 +1,9 @@
 *.swp
 .DS_Store
 .dropbox
-
 .idea/*
-__my*
-myowndocs/
+.vscode
+.tool-versions
+.DS_STORE
+
+myDoc/
