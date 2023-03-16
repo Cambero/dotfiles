@@ -51,7 +51,9 @@ alias pingg='ping google.com'
 
 # history
 alias h="history -i -50"
-alias hs="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+# alias hs="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+alias hs="history 0 | awk '{print \$2}' | sort | uniq -c | sort -nr | head -20 | awk '{print \$2,\$1}' | uplot bar -d ' ' -t 'Commands by use'"
+
 # "history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head"
 # what do this? ${(o)history%% *}
 alias top_cmd="print -l -- ${(o)history%% *} | uniq -c | sort -nr | head -n 10"
