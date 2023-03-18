@@ -104,6 +104,10 @@ cut -c4- |
 sed 's/.* -> //' |
 tr -d '\n'"
 
+# PKM
+alias pkmpush="cd ~/PKM && git pull && git add . && git commit -m 'update' && git push"
+
+
 # jless for yaml
 alias yless="jless --yaml"
 
