@@ -27,6 +27,9 @@ if [[ $USE_GNU_COMMANDS = true ]]; then
         gnu_path="$HOMEBREW_PREFIX/opt/$package/libexec/gnubin"
         [[ -d $gnu_path ]] && PATH="$gnu_path:$PATH"
     done
+
+    # curl
+    PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
     export PATH
 fi
 
