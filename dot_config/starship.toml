@@ -1,8 +1,5 @@
 format = """
 $directory\
-$docker_context\
-$ruby\
-$nodejs\
 $git_branch\
 $git_commit\
 $git_state\
@@ -13,6 +10,9 @@ $battery\
 $line_break\
 $character
 """
+# $docker_context\
+# $ruby\
+# $nodejs\
 
 add_newline = true
 

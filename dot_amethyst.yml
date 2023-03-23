@@ -37,6 +37,8 @@ window-minimum-width: 0
 floating:
     - com.apple.systempreferences
     - com.raycast.macos
+    - com.philipyoungg.session-setapp
+
 # floating-is-blacklist Boolean flag determining behavior of the floating list. true if the applications should be floating and all others tiled. false if the applications should be tiled and all others floating (default true).
 floating-is-blacklist: true
 # ignore-menu-bar   true if screen frames should exclude the status bar. false if the screen frames should include the status bar (default false).
@@ -78,10 +80,6 @@ debug-layout-info: true
 # disable-screen-padding-on-inbuilt true to disable screen padding on in-built display (default false).
 disable-screen-padding-on-inbuilt: false
 
-# relaunch-amethyst:
-#     mod: mod2
-#     key: z
-
 # cycle-layout    Move to the next layout in the list.
 cycle-layout:
     mod: mod1
@@ -89,8 +87,8 @@ cycle-layout:
 
 # cycle-layout-backward   Move to the previous layout in the list.
 cycle-layout-backward:
-    mod:
-    key:
+    mod: nil
+    key: nil
 
 # shrink-main Shrink the main pane by a percentage of the screen dimension as defined by window-resize-step. Note that not all layouts respond to this command.
 # shrink-main: NO
@@ -98,16 +96,31 @@ cycle-layout-backward:
 # expand-main: NO
 # increase-main   Increase the number of windows in the main pane. Note that not all layouts respond to this command.
 increase-main:
+    mod: mod1
+    key: ","
 # decrease-main   Decrease the number of windows in the main pane. Note that not all layouts respond to this command.
 decrease-main:
+    mod: mod1
+    key: "."
 # command1    General purpose command for custom layouts. Functionality is layout-dependent.
 command1:
+    mod: nil
+    key: nil
+
 # command2    General purpose command for custom layouts. Functionality is layout-dependent.
 command2:
+    mod: nil
+    key: nil
+
 # command3    General purpose command for custom layouts. Functionality is layout-dependent.
 command3:
+    mod: nil
+    key: nil
+
 # command4    General purpose command for custom layouts. Functionality is layout-dependent.
 command4:
+    mod: nil
+    key: nil
 # focus-ccw   Focus the next window in the list going counter-clockwise.
 # focus-ccw
 # focus-cw    Focus the next window in the list going clockwise.
@@ -129,19 +142,84 @@ command4:
 # swap-main   Swap the position of the currently focused window with the main window in the list.
 # swap-main
 # focus-screen-n  Move focus to the n-th screen in the list; e.g., focus-screen-3 will move mouse focus to the 3rd screen. Note that the main window in the given screen will be focused.
-# focus-screen-n
+focus-screen-1:
+    mod: mod1
+    key: "1"
+focus-screen-2:
+    mod: mod1
+    key: "2"
+focus-screen-3:
+    mod: mod1
+    key: "3"
+focus-screen-4:
+    mod: nil
+    key: nil
 # throw-screen-n  Move the currently focused window to the n-th screen; e.g., throw-screen-3 will move the window to the 3rd screen.
-# throw-screen-n
+throw-screen-1:
+    mod: mod2
+    key: "1"
+throw-screen-2:
+    mod: mod2
+    key: "2"
+throw-screen-3:
+    mod: mod2
+    key: "3"
+throw-screen-4:
+    mod: nil
+    key: nil
+
 # throw-space-n   Move the currently focused window to the n-th space; e.g., throw-space-3 will move the window to the 3rd space.
-# throw-space-n
+throw-space-1:
+    mod: nil
+    key: nil
+throw-space-2:
+    mod: nil
+    key: nil
+throw-space-3:
+    mod: nil
+    key: nil
+throw-space-4:
+    mod: nil
+    key: nil
+throw-space-5:
+    mod: nil
+    key: nil
+throw-space-6:
+    mod: nil
+    key: nil
+throw-space-7:
+    mod: nil
+    key: nil
+throw-space-8:
+    mod: nil
+    key: nil
+throw-space-9:
+    mod: nil
+    key: nil
+throw-space-10:
+    mod: nil
+    key: nil
+throw-space-11:
+    mod: nil
+    key: nil
+throw-space-12:
+    mod: nil
+    key: nil
 # throw-space-left    Move the currently focused window to the space to the left.
-# throw-space-left
+throw-space-left:
+    mod: nil
+    key: nil
 # throw-space-right   Move currently the focused window to the space to the right.
-# throw-space-right
+throw-space-right:
+    mod: nil
+    key: nil
 # toggle-float    Toggle the floating state of the currently focused window; i.e., if it was floating make it tiled and if it was tiled make it floating.
 # toggle-float
 # display-current-layout  Display the layout HUD with the current layout on each screen.
-# display-current-layout
+display-current-layout:
+    mod: nil
+    key: nil
+
 # toggle-tiling   Turn on or off tiling entirely.
 # toggle-tiling
 # reevaluate-windows  Rerun the current layout's algorithm.
@@ -150,4 +228,22 @@ command4:
 # toggle-focus-follows-mouse
 # relaunch-amethyst   Automatically quit and reopen Amethyst.
 # relaunch-amethyst
+select-fullscreen-layout:
+    mod: nil
+    key: nil
 
+select-column-layout:
+    mod: nil
+    key: nil
+
+select-wide-layout:
+    mod: nil
+    key: nil
+
+select-tall-layout:
+    mod: nil
+    key: nil
+
+select-tall-right-layout:
+    mod: nil
+    key: nil
