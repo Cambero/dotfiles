@@ -1,187 +1,50 @@
-# +---------------+
-# | Powerlevel10k |
-# +---------------+
-# if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-#   # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-#   if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#   fi
+source $ZDOTDIR/zshrc.d/prompt.zsh
 
-#   source $ZDOTDIR/plugins/powerlevel10k/powerlevel10k.zsh-theme
+source $ZDOTDIR/zshrc.d/options.zsh
 
-#   # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-#   [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-# fi
+source $ZDOTDIR/zshrc.d/history.zsh
 
-# +--------+
-# | Colors |
-# +--------+
-# There's a generator here: http://geoff.greer.fm/lscolors/
-autoload colors && colors
-source $ZDOTDIR/plugins/zcolors/zcolors.plugin.zsh
-source $ZDOTDIR/.zcolors
-eval "$(dircolors -b $ZDOTDIR/dircolors-solarized.256dark)"
+source $ZDOTDIR/zshrc.d/aliases
 
-# +--------------+
-# | Key Bindings |
-# +--------------+
-source $ZDOTDIR/key-bindings.zsh
-
-# +------------+
-# | Navigation |
-# +------------+
-setopt AUTO_CD              # If the command is a dirname perform cd
-setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
-setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
-setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
-
-# +----------+
-# | Settings |
-# +----------+
-setopt NOCLOBBER            # Don’t write over existing files with >, use >! instead
-setopt NOBEEP               # No beep
-setopt RM_STAR_WAIT         # wait ten seconds when `rm *' or `rm path/*'. can avoid by expanding the * in ZLE (with tab).
-setopt CORRECT              # Spelling correction
-setopt CDABLE_VARS          # Change directory to a path stored in a variable.
-setopt EXTENDED_GLOB        # Use extended globbing syntax.
-
-
-# +---------+
-# | History |
-# +---------+
-# if export in zshenv or zprofile will be overwrited by /etc/zshrc
-export HISTSIZE=50000            # Maximum events for internal history
-export SAVEHIST=50000            # Maximum events in history file
-# Dont save to history file this commands
-export HISTORY_IGNORE="(l *|la *|ll *|lla *|lsd *|ls *|cd|cd *|pwd|exit)"
-setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
-setopt SHARE_HISTORY             # Share history between all sessions.
-setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
-setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
-setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
-setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
-setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
-setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
-
-# +---------+
-# | Aliases |
-# +---------+
-source $ZDOTDIR/aliases
-
-
-# +----------+
-# | Zsh Help |
-# +----------+
-# Use zsh help instead man
-# bindkeys: alt-h  &  alt-H
-unalias run-help 2>/dev/null       # don't display err if already done
-autoload -Uz run-help              # load the function
-
-### Broot
-source $XDG_CONFIG_HOME/broot/launcher/bash/br
-
-### ZOXIDE
+source $ZDOTDIR/zshrc.d/lesspipe.zsh
+source $XDG_CONFIG_HOME/broot/launcher/bash/br # Broot
+source $ZDOTDIR/fzf.zsh
 eval "$(zoxide init zsh)"
 
-### FZF
-source $ZDOTDIR/fzf.zsh
+if [[ $TERM_PROGRAM = "WarpTerminal" ]]; then
+  [[ -f $ZDOTDIR/.zshrc.local ]] && source $ZDOTDIR/.zshrc.local
+  return
+fi
 
-### LESPIPPE
-# Changed on lesspipe.sh to avoid -ps stdin not a terminal error-
-# from: cmdtree=$(ps -T -oargs=)
-# to:   cmdtree=$(ps -oargs=)
-export LESSOPEN="|$HOMEBREW_PREFIX/bin/lesspipe.sh %s"
-export LESSHISTFILE=- # no use history .lesshst
-export LESS="--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --quit-at-eof"
+# Not in Warp
+source $ZDOTDIR/zshrc.d/zsh_help.zsh
 
-## FASD
-# Checking
-# eval "$(fasd --init auto)"
-# alias fe="fasd -ae"
+source $ZDOTDIR/zshrc.d/colors.zsh
 
-#
-### Completion
-#
+source $ZDOTDIR/zshrc.d/key-bindings.zsh
+
+# Completion
 # ctrl-x h show completion contexts
 source $ZDOTDIR/completion.zsh
 
-# FZF-TAB
-# NOTE: fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting!!
-source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
-
-
-# fzf-tab-previews
-# source $ZDOTDIR/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
-
-# https://github.com/Freed-Wu/fzf-tab-source
-# https://github.com/Aloxaf/fzf-tab/wiki/Configuration
-# to debug fzf-tab variables
-# zstyle ':fzf-tab:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
-# zstyle ':fzf-tab:complete:ls:*' fzf-preview 'echo  desc: $desc\\n realpath: $realpath \\n words: $words \\n word: $word \\n group: $group'
-
-
-# zstyle ':completion::complete:-parameter-::' fzf-preview 'echo var'
-# Preview for ENV VARS
-# zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
-# zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
-# 	'git diff $word | delta'
-# Disable / enable on commands
-# <command list> === (cd|ls)
-# zstyle ':fzf-tab:complete:<command in allowlist>:*' disabled-on none
-# zstyle ':fzf-tab:complete:exa:*' disabled-on files
-# zstyle ':fzf-tab:complete:exa:*' disabled-on any
-
-##
-## Scripts
-##
+# Scripts
 for file in $ZDOTDIR/scripts/*.zsh; do
   source $file
 done
 source $ZDOTDIR/functions.zsh
 
-##
-## Plugins
-##
+# fzf-tab
+# NOTE: fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting!!
+source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
 
-source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20 # Doc Recommended value is 20.
-
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
-# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8,bold"
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=249"
-
-# Widget Mapping
-# This plugin works by triggering custom behavior when certain zle widgets are invoked. You can add and remove widgets from these arrays to change the behavior of this plugin:
-# ZSH_AUTOSUGGEST_CLEAR_WIDGETS: Widgets in this array will clear the suggestion when invoked.
-# ZSH_AUTOSUGGEST_ACCEPT_WIDGETS: Widgets in this array will accept the suggestion when invoked.
-# ZSH_AUTOSUGGEST_EXECUTE_WIDGETS: Widgets in this array will execute the suggestion when invoked.
-# ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS: Widgets in this array will partially accept the suggestion when invoked.
-# ZSH_AUTOSUGGEST_IGNORE_WIDGETS: Widgets in this array will not trigger any custom behavior.
-# Widgets that modify the buffer and are not found in any of these arrays will fetch a new suggestion after they are invoked.
-# Note: A widget shouldn't belong to more than one of the above arrays.
-
-# Remove (el) from (arr)ay
-# arr=("${(@)arr:#el}")
-
-# ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
-# cual me gusta mas
-# alt-m
-bindkey "^[m" autosuggest-execute
-# # ctrl-space
-# bindkey '^ ' autosuggest-execute
-# alt-enter
-bindkey '^[^M' autosuggest-execute
+# autosuggestions
+source $ZDOTDIR/zshrc.d/autosuggestions.zsh
 
 # Note the source command must be at the end of ~/.zshrc.
-source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 # fast-theme -l # list themes
 # fast-theme -t # test theme
+source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-  test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
-fi
+test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
 
 [[ -f $ZDOTDIR/.zshrc.local ]] && source $ZDOTDIR/.zshrc.local
-
-eval "$(starship init zsh)"
